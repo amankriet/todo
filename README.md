@@ -2,11 +2,13 @@
 
 This project is referenced from YouTube and some personal modifications.
 
-## Tech Used
+## Tech used
 
 * ReactJs
-* useState
-* useEffect
+  * useState
+  * useEffect
+* localStorage
+* css transitions
 
 ## Pending Work
 

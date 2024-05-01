@@ -34,7 +34,13 @@ function App() {
   const completedTasks = tasks.filter(task => task.done)
 
   function getMessage() {
-    return 'Keep it going '
+    const percentage = completedTasks.length/tasks.length * 100
+
+    switch (percentage) {
+      case 0: return "Try to do at least one! 🙏"
+      case 100: return 'Nice job for today! 💯'
+      default: return 'Keep it going 💪'
+    }
   }
 
   return (

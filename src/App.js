@@ -1,69 +1,50 @@
 import "./App.css"
-import { useState } from "react"
-import deleteIcon from "./icons/delete.svg"
-import editIcon from "./icons/edit.svg"
-import addButton from "./icons/add.svg"
-import updateButton from "./icons/update-arrow.svg"
+import { useEffect, useState } from "react"
+import TaskForm from "./components/TaskForm"
+import Task from "./components/Task"
 
 function App() {
-  const [input, setInput] = useState("")
-  const [list, setList] = useState([])
-  const [taskIndex, setTaskIndex] = useState(-1)
+  const [tasks, setTasks] = useState([])
 
-  const handleInput = (e) => {
-    setInput(e.target.value)
-  }
-
-  const handleTask = () => {
-    setList([...list, input])
-    setInput("");
-  }
-  const handleUpdate = () => {
-    if (taskIndex !== -1) {
-      list.splice(taskIndex, 1, input)
-      setInput("")
-      setTaskIndex(-1)
-    } else {
-      alert("No task selected for update")
+  useEffect(() => {
+    const tasks = localStorage.getItem('tasks')
+    if (tasks !== "[]") {
+      setTasks(JSON.parse(tasks))
     }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
+
+  function addTask(taskName) {
+    setTasks(prev => {
+      return [...prev, { name: taskName, done: false }]
+    })
   }
 
-  const handleDelete = (i) => {
-    const filterList = list.filter((ele) => ele !== list[i])
-    setList(filterList)
+  function updateTaskDone(taskIndex, done) {
+    setTasks(prev => {
+      const newTasks = [...prev]
+      newTasks[taskIndex].done = done
+      return newTasks
+    })
   }
 
-  const handleEdit = (i) => {
-    const filterList = list.filter((ele) => ele === list[i])
-    setInput(filterList[0])
-    setTaskIndex(i);
+  const completedTasks = tasks.filter(task => task.done)
+
+  function getMessage() {
+    return 'Keep it going '
   }
 
   return (
-    <div className="App">
-      <h2>ToDo App</h2>
-      <div className="container">
-        <form className="input-box">
-          <input
-            type="text"
-            value={input}
-            className="todo-input"
-            placeholder="Enter new task"
-            onChange={(e) => handleInput(e)}
-          />
-          {taskIndex > -1 ?
-            <img src={updateButton} alt="Update Button" className="update-button" title="Update Task" onClick={handleUpdate} />
-            :
-            <img src={addButton} alt="Add button" className="add-button" title="Add Task" onClick={handleTask} />}
-        </form>
-        <div className="list">
-          <ul>
-            {list.map((item, i) => <li key={i}>{item} <img src={deleteIcon} alt="Delete" className="icon-button del-icon" title="Delete" onClick={() => handleDelete(i)} />
-              <img src={editIcon} alt="Edit" title="Edit" className="icon-button edit-icon" onClick={() => handleEdit(i)} /> </li>)}
-          </ul>
-        </div>
-      </div>
-    </div>
+    <main>
+      <h1>Todo List</h1>
+      <h2>{completedTasks.length}/{tasks.length} Complete</h2>
+      <h3>{getMessage()}</h3>
+      <TaskForm onAdd={addTask} />
+      {tasks.map((task, index) => <Task {...task} onToggle={done => updateTaskDone(index, done)} />)}
+    </main>
   );
 }
 

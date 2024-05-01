@@ -1,76 +1,88 @@
-.App {
+body {
   text-align: center;
+  background-color: #333;
+  color: #ddd;
 }
 
-.container {
-  max-width: 50%;
+* {
+  box-sizing: border-box;
+}
+
+main {
+  max-width: 300px;
   margin: 0 auto;
-  font-size: 1.2rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding: 1.2rem;
-  border-radius: 0.4rem;
-  background-color: #fefefe;
 }
 
-.input-box {
+form {
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  min-width: 200px;
+  border: 2px solid #303c3c;
+  border-radius: 8px;
+  padding: 4px;
   display: flex;
-  max-height: 2rem;
-  justify-content: center;
 }
 
-.input-box > input {
-  flex-grow: 0.5;
+form input[type="text"] {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0 8px;
+  display: block;
+  width: 100%;
+  color: #aaa;
+  font-size: 1.2em;
 }
 
-.input-box > button {
+form button {
   outline: none;
   border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0 4px;
+  background-color: #66DDFF;
 }
 
-.list {
-  text-align: left;
+.add-btn,
+.update-btn {
+  height: 24px;
+  padding: 4px;
 }
 
-.list ul {
-  padding-left: 0;
-  list-style: none;
+div.task {
+  background-color: #303c3c;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 6px;
+  text-align: start;
+  display: flex;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.list ul li {
-  background-color: #f0f0f0;
+div.task.done {
+  opacity: 0.4;
+}
+
+div.task span {
   position: relative;
-  padding: 0.2rem;
-  margin-bottom: 1.2rem;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.2rem 0.2rem,
-    rgba(0, 0, 0, 0.12) 0px -0.2rem 0.8rem,
-    rgba(0, 0, 0, 0.12) 0px 0.4rem 0.8rem, rgba(0, 0, 0, 0.17) 0px 0.2rem 0.8rem,
-    rgba(0, 0, 0, 0.09) 0px -0.4rem 0.4rem;
-  border-radius: 0.2rem;
 }
 
-.icon-button {
-  height: 0.8rem;
+div.task span::before {
   position: absolute;
-  top: 0.48rem;
-  opacity: 0.5;
+  top: 10px;
+  content: '';
+  display: block;
+  width: 0;
+  height: 1px;
+  background-color: #ddd;
+  transition: width .1s ease-in-out;
 }
 
-.add-button {
-  height: 1.4rem;
-  padding: 0.4rem;
-  /* transform: translate(0%, 35%); */
+div.task.done span::before {
+  width: 100%;
 }
 
-.update-button {
-  height: 1.4rem;
-  padding: 0.4rem;
-  /* transform: translate(0%, 35%); */
-}
-
-.del-icon {
-  right: 0.4rem;
-}
-
-.edit-icon {
-  right: 1.6rem;
+div.task svg {
+  height: 20px;
+  width: 20px;
+  margin-right: 4px;
 }

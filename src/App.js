@@ -43,15 +43,33 @@ function App() {
     }
   }
 
+  function removeTask(taskIndex) {
+    setTasks(prev => {
+      return prev.filter((task, index) => index !== taskIndex)
+    })
+  }
+
+  function renameTask(taskIndex, taskName) {
+    setTasks(prev => {
+      const newTasks = [...prev]
+      newTasks[taskIndex].name = taskName
+      return newTasks
+    })
+  }
+
   return (
     <main>
       <h1>Todo List</h1>
       <h2>{completedTasks.length}/{tasks.length} Complete</h2>
       <h3>{getMessage()}</h3>
       <TaskForm onAdd={addTask} />
-      {tasks.map((task, index) => <Task {...task} onToggle={done => updateTaskDone(index, done)} />)}
+      {tasks.map((task, index) =>
+          <Task {...task}
+                onRename={taskName => renameTask(index, taskName)}
+                onDelete={() => removeTask(index)}
+                onToggle={done => updateTaskDone(index, done)} />)}
     </main>
-  );
+  )
 }
 
-export default App;
+export default App

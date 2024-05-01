@@ -1,6 +1,5 @@
 import { useState } from "react"
-import addButton from "../icons/add.svg"
-import updateButton from "../icons/update-arrow.svg"
+import {ReactComponent as AddIcon} from "../icons/add.svg"
 
 function TaskForm({ onAdd }) {
     const [taskName, setTaskName] = useState("")
@@ -13,11 +12,7 @@ function TaskForm({ onAdd }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            {true ?
-                <button><img className="add-btn" src={addButton} alt="Add New Task" /></button>
-                :
-                <button><img className="update-btn" src={updateButton} alt="Update Task" /></button>
-            }
+            <button><AddIcon /></button>
             <input
                 type="text"
                 value={taskName}

@@ -42,9 +42,9 @@ form button {
   background-color: #66DDFF;
 }
 
-.add-btn,
-.update-btn {
+form button svg {
   height: 24px;
+  width: 24px;
   padding: 4px;
 }
 
@@ -55,7 +55,12 @@ div.task {
   margin-top: 6px;
   text-align: start;
   display: flex;
+  align-items: center;
   transition: opacity 0.3s ease-in-out;
+}
+
+div.checkbox {
+  display: flex;
 }
 
 div.task.done {
@@ -85,4 +90,14 @@ div.task svg {
   height: 20px;
   width: 20px;
   margin-right: 4px;
+}
+
+div.task-tools svg {
+  height: 16px;
+  cursor: pointer;
+}
+
+div.task-tools {
+  display: flex;
+  margin-left: auto;
 }

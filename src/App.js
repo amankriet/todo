@@ -80,7 +80,7 @@ function App() {
       </h2>
       <h3>{getMessage()}</h3>
       <TaskForm onAdd={addTask} />
-      {tasks.map((task, index) => (
+      {tasks.map((task) => (
         <Task
           key={task.id}
           {...task}

@@ -1,19 +1,21 @@
 import Checkbox from "./Checkbox"
 import TaskTools from "./TaskTools"
-import {useState} from "react"
+import { useState } from "react"
 import RenameForm from "./RenameForm";
 
-function Task({ name, done, onToggle, onDelete, onRename }) {
+function Task({ task, completed, onToggle, onDelete, onRename }) {
     const [editMode, setEditMode] = useState(false);
 
     return (
-        <div className={'task ' + (done?'done':'')}>
-            <Checkbox checked={done} onClick={() => onToggle(!done)} />
-            {!editMode && (
-                <span>{name}</span>
-            )}
+        <div className={'task ' + (completed ? 'done' : '')}>
+            <Checkbox checked={completed} onClick={() => onToggle(!completed)} />
+            {!editMode && (<span>{task}</span>)}
             {editMode && (
-                <RenameForm name={name} onRename={onRename} disableEditMode={() => setEditMode(false)} />
+                <RenameForm
+                    name={task}
+                    onRename={onRename}
+                    disableEditMode={() => setEditMode(false)}
+                />
             )}
             <TaskTools onDelete={onDelete} onEdit={() => setEditMode(prev => !prev)} />
         </div>

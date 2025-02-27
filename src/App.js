@@ -84,9 +84,9 @@ function App() {
         <Task
           key={task.id}
           {...task}
-          onRename={(taskName) => handleRenameTask(index, taskName)}
-          onDelete={() => handleDeleteTask(index)}
-          onToggle={(done) => handleToggleTask(index, done)}
+          onRename={(taskName) => handleRenameTask(task.id, taskName)}
+          onDelete={() => handleDeleteTask(task.id)}
+          onToggle={(done) => handleToggleTask(task.id, done)}
         />
       ))}
     </main>

@@ -1,5 +1,5 @@
 // Base URL for the Spring Boot Todo API
-const API_URL = `http://localhost:${process.env.REACT_APP_API_PORT || 8080}/todos`;
+const API_URL = `{process.env.REACT_APP_API_URL}/todos`;
 
 export const fetchTodos = async () => {
     const response = await fetch(API_URL);
